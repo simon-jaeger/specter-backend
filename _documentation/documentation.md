@@ -62,3 +62,10 @@ Comment }o--|| User : "has"
 > IDs and timestamps are implicit.
  
 > The multi perspective videos are called "cubes". Each perspective is a "side".
+ 
+## API
+
+A RESTful API is exposed under `/api`.
+All available endpoints are documented using [Insomnia](https://insomnia.rest/).
+
+[→ insomnia.json](insomnia.json)
