@@ -1,3 +1,5 @@
-*
-!public/
-!.gitignore
+private/*
+!private/avatar.svg
+
+public/*
+!public/.gitkeep

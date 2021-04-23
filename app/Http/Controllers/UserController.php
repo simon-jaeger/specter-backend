@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
+use Storage;
 
 class UserController extends Controller {
   public function me() {
@@ -39,11 +40,20 @@ class UserController extends Controller {
       User::username => User::rules(User::username, $user),
       User::email => User::rules(User::email, $user),
       User::password => User::rules(User::password),
+      User::avatar => User::rules(User::avatar),
     ]);
     $user->fill($data);
     if ($request->has(User::password))
       $user->password = Hash::make($request->get(User::password));
+    if ($request->has(User::avatar)) {
+      Storage::delete($user->avatar);
+      $user->avatar = Storage::putFile('', $request->file(User::avatar));
+    }
     $user->save();
     return $user;
+  }
+
+  public function avatar(User $user) {
+    return Storage::response($user->avatar ?? 'avatar.svg');
   }
 }

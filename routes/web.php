@@ -19,4 +19,5 @@ Route::prefix('api')->middleware('throttle:90,1')->group(function () {
   Route::patch('/user', [UserController::class, 'update'])->middleware('auth');
   Route::get('/users', [UserController::class, 'index']);
   Route::get('/users/{user}', [UserController::class, 'show']);
+  Route::get('/users/{user}/avatar', [UserController::class, 'avatar']);
 });

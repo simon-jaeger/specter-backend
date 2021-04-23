@@ -13,6 +13,7 @@ class User extends Authenticatable {
   const username = 'username';
   const email = 'email';
   const password = 'password';
+  const avatar = 'avatar';
 
   public static function rules(string $field, User $existingUser = null) {
     $reqIfNew = $existingUser === null ? 'required' : 'sometimes';
@@ -21,6 +22,7 @@ class User extends Authenticatable {
       User::username => [$reqIfNew, 'alpha_dash', 'max:255', $unique],
       User::email => [$reqIfNew, 'email', $unique],
       User::password => [$reqIfNew, 'string', 'min:8'],
+      User::avatar => ['sometimes', 'image', 'max:1024'],
     };
   }
 
