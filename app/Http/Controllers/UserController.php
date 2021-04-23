@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -10,7 +11,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class UserController extends Controller {
   public function me() {
-    return User::find(1);
+    return Auth::user();
   }
 
   public function show(User $user) {
@@ -33,7 +34,7 @@ class UserController extends Controller {
   }
 
   public function update(Request $request) {
-    $user = User::find(1);
+    $user = Auth::user();
     $data = $request->validate([
       User::username => User::rules(User::username, $user),
       User::email => User::rules(User::email, $user),
