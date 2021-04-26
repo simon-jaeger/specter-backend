@@ -6,6 +6,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Validation\Rule;
 
+/**
+ * @mixin IdeHelperUser
+ */
 class User extends Authenticatable {
   use ModelHelpers, HasFactory;
 
@@ -28,4 +31,9 @@ class User extends Authenticatable {
 
   protected $fillable = [self::username, self::email];
   protected $hidden = [self::password, 'remember_token'];
+
+  public function jsonSerialize() {
+    $this->avatar = route('users.avatar', ['user' => $this->id]);
+    return $this->toArray();
+  }
 }
