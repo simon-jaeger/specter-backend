@@ -36,4 +36,8 @@ class User extends Authenticatable {
     $this->avatar = route('users.avatar', ['user' => $this->id]);
     return parent::toArray();
   }
+
+  public function cubes() {
+    return $this->hasMany(Cube::class);
+  }
 }
