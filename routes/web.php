@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CubeController;
+use App\Http\Controllers\CubeThumbnailController;
 use App\Http\Controllers\UserController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
@@ -31,4 +32,8 @@ Route::prefix('api')->middleware('throttle:90,1')->group(function () {
   Route::get('/cubes/{cube}', [CubeController::class, 'show']);
   Route::patch('/cubes/{cube}', [CubeController::class, 'update'])->middleware('auth');
   Route::delete('/cubes/{cube}', [CubeController::class, 'destroy'])->middleware('auth');
+
+  Route::get('/cubes/{cube}/thumbnail', [CubeThumbnailController::class, 'show'])->name('cubes.thumbnail');
+  Route::post('/cubes/{cube}/thumbnail', [CubeThumbnailController::class, 'create'])->middleware('auth');
+  Route::delete('/cubes/{cube}/thumbnail', [CubeThumbnailController::class, 'destroy'])->middleware('auth');
 });
