@@ -1,5 +1,6 @@
 private/*
 !private/avatar.svg
+!private/thumbnail.svg
 
 public/*
 !public/.gitkeep

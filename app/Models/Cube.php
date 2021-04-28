@@ -16,6 +16,7 @@ class Cube extends Model {
   const title = 'title';
   const description = 'description';
   const private = 'private';
+  const thumbnail = 'thumbnail';
   const views = 'views';
   const duration = 'duration';
 
@@ -25,6 +26,7 @@ class Cube extends Model {
       Cube::title => [$reqIfNew, 'filled', 'string', 'max:255'],
       Cube::description => ['nullable', 'string', 'max:1000'],
       Cube::private => ['sometimes', 'boolean'],
+      Cube::thumbnail => ['image', 'max:1024'],
     };
   }
 
@@ -35,6 +37,11 @@ class Cube extends Model {
 
   public function user() {
     return $this->belongsTo(User::class);
+  }
+
+  public function toArray() {
+    $this->thumbnail = route('cubes.thumbnail', ['cube' => $this->id]);
+    return parent::toArray();
   }
 
   public function owned() {

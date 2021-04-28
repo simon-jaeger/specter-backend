@@ -13,6 +13,7 @@ class CreateCubesTable extends Migration {
       $table->string(Cube::title);
       $table->text(Cube::description)->nullable();
       $table->boolean(Cube::private)->default(1);
+      $table->string(Cube::thumbnail)->nullable();
       $table->integer(Cube::views)->unsigned()->default(0);
       $table->integer(Cube::duration)->unsigned()->default(0);
       $table->foreignId(User::foreignKey())->constrained();
