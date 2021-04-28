@@ -32,8 +32,8 @@ class User extends Authenticatable {
   protected $fillable = [self::username, self::email];
   protected $hidden = [self::password, 'remember_token'];
 
-  public function jsonSerialize() {
+  public function toArray() {
     $this->avatar = route('users.avatar', ['user' => $this->id]);
-    return $this->toArray();
+    return parent::toArray();
   }
 }
