@@ -2,6 +2,7 @@
     "private": true,
     "scripts": {
         "seed": "php artisan migrate:fresh --seed",
+        "clean": "php artisan clean",
         "helper": "php artisan clear-compiled && php artisan ide-helper:generate && php artisan ide-helper:models -M && php artisan ide-helper:meta"
     }
 }
