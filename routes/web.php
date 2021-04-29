@@ -40,4 +40,6 @@ Route::prefix('api')->group(function () {
   Route::get('/cubes/{cube}/thumbnail', [CubeThumbnailController::class, 'show'])->name('cubes.thumbnail');
   Route::post('/cubes/{cube}/thumbnail', [CubeThumbnailController::class, 'create'])->middleware('auth');
   Route::delete('/cubes/{cube}/thumbnail', [CubeThumbnailController::class, 'destroy'])->middleware('auth');
+
+  // TODO: flat endpoints for other resources (/comments?filter[cube_id]=42)
 });
