@@ -25,11 +25,11 @@ class User extends Authenticatable {
       User::username => [$reqIfNew, 'alpha_dash', 'max:255', $unique],
       User::email => [$reqIfNew, 'email', $unique],
       User::password => [$reqIfNew, 'string', 'min:8'],
-      User::avatar => ['sometimes', 'image', 'max:1024'],
+      User::avatar => ['image', 'max:1024'],
     };
   }
 
-  protected $fillable = [self::username, self::email];
+  protected $guarded = [self::password, 'remember_token'];
   protected $hidden = [self::password, 'remember_token'];
 
   public function toArray() {

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CubeController;
 use App\Http\Controllers\CubeThumbnailController;
+use App\Http\Controllers\UserAvatarController;
 use App\Http\Controllers\UserController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
@@ -22,7 +23,10 @@ Route::prefix('api')->group(function () {
 
   Route::get('/users', [UserController::class, 'index']);
   Route::get('/users/{user}', [UserController::class, 'show']);
-  Route::get('/users/{user}/avatar', [UserController::class, 'avatar'])->name('users.avatar');
+
+  Route::get('/users/{user}/avatar', [UserAvatarController::class, 'show'])->name('users.avatar');
+  Route::post('/user/avatar', [UserAvatarController::class, 'create'])->middleware('auth');
+  Route::delete('/user/avatar', [UserAvatarController::class, 'destroy'])->middleware('auth');
 
   // cubes
   Route::get('/user/cubes', [CubeController::class, 'indexOwned'])->middleware('auth');
