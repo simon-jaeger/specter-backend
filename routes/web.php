@@ -7,7 +7,7 @@ use App\Http\Controllers\UserController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('api')->middleware('throttle:90,1')->group(function () {
+Route::prefix('api')->group(function () {
   // meta
   Route::get('/ping', fn() => 'pong [' . Carbon::now()->getTimestamp() . ']');
 
