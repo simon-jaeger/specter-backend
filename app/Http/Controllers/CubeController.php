@@ -22,7 +22,8 @@ class CubeController extends Controller {
         Cube::duration,
         Cube::CREATED_AT,
         Cube::UPDATED_AT,
-      )->get();
+      )
+      ->paginate(100)->appends(request()->query());
   }
 
   public function index() {
@@ -39,7 +40,7 @@ class CubeController extends Controller {
         Cube::CREATED_AT,
         Cube::UPDATED_AT,
       )
-      ->get();
+      ->paginate(100)->appends(request()->query());
   }
 
   public function create(Request $request) {
