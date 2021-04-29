@@ -31,7 +31,8 @@ class UserController extends Controller {
         User::email,
         User::CREATED_AT,
         User::UPDATED_AT,
-      )->get();
+      )
+      ->paginate(100)->appends(request()->query());
   }
 
   public function update(Request $request) {
