@@ -25,6 +25,7 @@ class Side extends Model {
     return match ($field) {
       Side::name => [$reqIfNew, 'string', 'max:64'],
       Side::position => [$reqIfNew, Rule::in(range(1, self::_limit))],
+      Side::video => ['mimetypes:video/mp4,video/webm', 'max:4096'],
       Cube::foreignKey() => ['required', Rule::exists(Cube::plural(), 'id')->where(fn($query) => $query->where(User::foreignKey(), Auth::id()))],
     };
   }
@@ -36,5 +37,10 @@ class Side extends Model {
 
   public function cube() {
     return $this->belongsTo(Cube::class);
+  }
+
+  public function toArray() {
+    $this->video = route('sides.video', ['side' => $this->id]);
+    return parent::toArray();
   }
 }
