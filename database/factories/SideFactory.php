@@ -11,7 +11,7 @@ class SideFactory extends Factory {
   public function definition() {
     return [
       Side::name => $this->faker->words(rand(1, 2), true),
-      Side::video => rand(1, 4) . '.mp4',
+      Side::video => null,
       Side::position => $this->faker->numberBetween(1, 6),
     ];
   }
