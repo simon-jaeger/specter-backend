@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CubeController;
 use App\Http\Controllers\CubeThumbnailController;
 use App\Http\Controllers\SideController;
+use App\Http\Controllers\SideVideoController;
 use App\Http\Controllers\UserAvatarController;
 use App\Http\Controllers\UserController;
 use Carbon\Carbon;
@@ -47,7 +48,10 @@ Route::prefix('api')->group(function () {
   Route::patch('/sides/{side}', [SideController::class, 'update'])->middleware('auth');
   Route::delete('/sides/{side}', [SideController::class, 'destroy'])->middleware('auth');
 
-  // TODO: SideVideoController
+  Route::get('/sides/{side}/video', [SideVideoController::class, 'show'])->name('sides.video');
+  Route::post('/sides/{side}/video', [SideVideoController::class, 'create'])->middleware('auth');
+  Route::delete('/sides/{side}/video', [SideVideoController::class, 'destroy'])->middleware('auth');
+
   // TODO: update insomnia.json
   // TODO: adjust clean up script for video files
 
