@@ -52,8 +52,5 @@ Route::prefix('api')->group(function () {
   Route::post('/sides/{side}/video', [SideVideoController::class, 'create'])->middleware('auth');
   Route::delete('/sides/{side}/video', [SideVideoController::class, 'destroy'])->middleware('auth');
 
-  // TODO: update insomnia.json
-  // TODO: adjust clean up script for video files
-
   // TODO: flat endpoints for other resources (/comments?filter[cube_id]=42)
 });

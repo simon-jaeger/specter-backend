@@ -3,6 +3,7 @@
 use App\Http\Controllers\CubeThumbnailController;
 use App\Http\Controllers\UserAvatarController;
 use App\Models\Cube;
+use App\Models\Side;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;
@@ -30,6 +31,12 @@ Artisan::command('clean', function () {
   $this->line('registering cube thumbnails...');
   $this->withProgressBar(Cube::all(), function (Cube $cube) use ($toKeep) {
     if ($cube->thumbnail) $toKeep->push($cube->thumbnail);
+  });
+  $this->newLine(2);
+
+  $this->line('registering side videos...');
+  $this->withProgressBar(Side::all(), function (Side $side) use ($toKeep) {
+    if ($side->video) $toKeep->push($side->video);
   });
   $this->newLine(2);
 
