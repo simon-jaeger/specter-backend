@@ -6,11 +6,14 @@ use Illuminate\Http\Request;
 use Storage;
 
 class SideVideoController extends Controller {
-  public function show(Side $side) {
+  public function show(Request $request, Side $side) {
     $cube = $side->cube;
     if ($cube->private && !$cube->owned()) return abort(404);
     if ($side->video === null) return abort(404);
-    return Storage::response($side->video);
+    if ($request->boolean('html'))
+      return $side->toHtmlVideo();
+    else
+      return Storage::response($side->video);
   }
 
   public function create(Request $request, Side $side) {
@@ -21,7 +24,7 @@ class SideVideoController extends Controller {
     ]);
     $side->video = Storage::putFile('', $request->file(Side::video));
     $side->save();
-    return Storage::response($side->video);
+    return 'ok';
   }
 
   public function destroy(Side $side) {
