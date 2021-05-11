@@ -20,4 +20,8 @@ trait ModelHelpers {
   public static function plural() {
     return Str::plural(self::singular());
   }
+
+  public static function count() {
+    return self::plural() . '_count';
+  }
 }

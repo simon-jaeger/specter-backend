@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cube;
+use App\Models\Side;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -54,6 +55,7 @@ class CubeController extends Controller {
 
   public function show(Cube $cube) {
     if ($cube->private && !$cube->owned()) return abort(404);
+    $cube->load(Side::plural());
     return $cube;
   }
 

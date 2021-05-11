@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CubeController;
 use App\Http\Controllers\CubeThumbnailController;
+use App\Http\Controllers\SideController;
 use App\Http\Controllers\UserAvatarController;
 use App\Http\Controllers\UserController;
 use Carbon\Carbon;
@@ -40,6 +41,15 @@ Route::prefix('api')->group(function () {
   Route::get('/cubes/{cube}/thumbnail', [CubeThumbnailController::class, 'show'])->name('cubes.thumbnail');
   Route::post('/cubes/{cube}/thumbnail', [CubeThumbnailController::class, 'create'])->middleware('auth');
   Route::delete('/cubes/{cube}/thumbnail', [CubeThumbnailController::class, 'destroy'])->middleware('auth');
+
+  // sides
+  Route::post('/sides', [SideController::class, 'create'])->middleware('auth');
+  Route::patch('/sides/{side}', [SideController::class, 'update'])->middleware('auth');
+  Route::delete('/sides/{side}', [SideController::class, 'destroy'])->middleware('auth');
+
+  // TODO: SideVideoController
+  // TODO: update insomnia.json
+  // TODO: adjust clean up script for video files
 
   // TODO: flat endpoints for other resources (/comments?filter[cube_id]=42)
 });
