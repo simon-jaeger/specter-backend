@@ -39,6 +39,10 @@ class Cube extends Model {
     return $this->belongsTo(User::class);
   }
 
+  public function sides() {
+    return $this->hasMany(Side::class)->orderBy(Side::position);
+  }
+
   public function toArray() {
     $this->thumbnail = route('cubes.thumbnail', ['cube' => $this->id]);
     return parent::toArray();

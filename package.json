@@ -3,6 +3,7 @@
     "scripts": {
         "seed": "php artisan migrate:fresh --seed",
         "clean": "php artisan clean",
+        "composer-refresh": "composer dump-autoload",
         "helper": "php artisan clear-compiled && php artisan ide-helper:generate && php artisan ide-helper:models -M && php artisan ide-helper:meta"
     }
 }

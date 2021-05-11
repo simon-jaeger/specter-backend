@@ -24,10 +24,12 @@ Cube {
     thumbnail file
     views number
     duration seconds
-    sideTop file
-    sideRight file
-    sideBottom file
-    sideLeft file
+}
+
+Side {
+    name string
+    position number
+    video file
 }
 
 Tag {
@@ -54,6 +56,7 @@ History }o--o{ Cube : "has"
 User ||--o{ Playlist : "has"
 Playlist }o--o{ Cube : "has"
 
+Cube ||--|{ Side : "has"
 Cube }o--o{ Tag : "has"
 Cube ||--o{ Comment : "has"
 Comment }o--|| User : "has"
