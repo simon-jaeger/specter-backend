@@ -43,4 +43,14 @@ class Side extends Model {
     $this->video = route('sides.video', ['side' => $this->id]);
     return parent::toArray();
   }
+
+  // intended for debugging in insomnia
+  public function toHtmlVideo() {
+    $src = route('sides.video', ['side' => $this->id]);
+    return "
+      <body style='background: #222222; padding: 1rem; display:flex; justify-content:center; align-items: flex-start;'>
+        <video width='400' controls src='{$src}'/>
+      </body>
+    ";
+  }
 }
