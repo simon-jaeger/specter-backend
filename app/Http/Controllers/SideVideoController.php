@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Side;
 use Illuminate\Http\Request;
+use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 use Storage;
 
 class SideVideoController extends Controller {
@@ -24,7 +25,9 @@ class SideVideoController extends Controller {
     ]);
     $side->video = Storage::putFile('', $request->file(Side::video));
     $side->save();
-    return 'ok';
+    $cube->duration = FFMpeg::open($side->video)->getDurationInSeconds();
+    $cube->save();
+    return 'ok: ' . $cube->duration . ' seconds';
   }
 
   public function destroy(Side $side) {

@@ -11,6 +11,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
+        "pbmedia/laravel-ffmpeg": "^7.5",
         "spatie/laravel-query-builder": "^3.3"
     },
     "require-dev": {
