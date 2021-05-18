@@ -25,7 +25,7 @@ class Side extends Model {
     return match ($field) {
       Side::name => [$reqIfNew, 'string', 'max:64'],
       Side::position => [$reqIfNew, Rule::in(range(1, self::_limit))],
-      Side::video => ['mimetypes:video/mp4,video/webm', 'max:4096'],
+      Side::video => ['mimetypes:video/mp4,video/webm', 'max:1048576'], // 1gb max
       Cube::foreignKey() => ['required', Rule::exists(Cube::plural(), 'id')->where(fn($query) => $query->where(User::foreignKey(), Auth::id()))],
     };
   }

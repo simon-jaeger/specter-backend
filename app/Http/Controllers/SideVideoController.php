@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 use App\Models\Side;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+use Pion\Laravel\ChunkUpload\Exceptions\UploadMissingFileException;
+use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 use Storage;
 
@@ -17,17 +20,32 @@ class SideVideoController extends Controller {
       return Storage::response($side->video);
   }
 
-  public function create(Request $request, Side $side) {
+  public function create(Request $request, FileReceiver $receiver, Side $side) {
     $cube = $side->cube;
     if (!$cube->owned()) return abort(404);
     $request->validate([
       Side::video => Side::rules(Side::video)
     ]);
-    $side->video = Storage::putFile('', $request->file(Side::video));
-    $side->save();
-    $cube->duration = FFMpeg::open($side->video)->getDurationInSeconds();
-    $cube->save();
-    return 'ok: ' . $cube->duration . ' seconds';
+
+    // start chunk uploading
+    if ($receiver->isUploaded() === false) throw new UploadMissingFileException();
+    $upload = $receiver->receive();
+
+    // on final chunk
+    if ($upload->isFinished()) {
+      $side->video = Storage::putFile('', $upload->getFile());
+      $side->save();
+      $cube->duration = FFMpeg::open($side->video)->getDurationInSeconds();
+      $cube->save();
+      return '[ok] video duration: ' . $cube->duration . ' seconds';
+    }
+
+    // on progress
+    /** @var AbstractHandler $handler */
+    $handler = $upload->handler();
+    return response()->json([
+      "done" => $handler->getPercentageDone()
+    ]);
   }
 
   public function destroy(Side $side) {
