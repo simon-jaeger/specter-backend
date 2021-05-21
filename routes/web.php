@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CubeController;
 use App\Http\Controllers\CubeThumbnailController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\SideController;
 use App\Http\Controllers\SideVideoController;
 use App\Http\Controllers\UserAvatarController;
@@ -31,7 +32,7 @@ Route::prefix('api')->group(function () {
   Route::delete('/user/avatar', [UserAvatarController::class, 'destroy'])->middleware('auth');
 
   // cubes
-  Route::get('/user/cubes', [CubeController::class, 'indexOwned'])->middleware('auth');
+  Route::get('/user/cubes', [CubeController::class, 'indexUser'])->middleware('auth');
   Route::get('/cubes', [CubeController::class, 'index']);
   Route::post('/cubes', [CubeController::class, 'create'])->middleware('auth');
 
@@ -51,6 +52,10 @@ Route::prefix('api')->group(function () {
   Route::get('/sides/{side}/video', [SideVideoController::class, 'show'])->name('sides.video');
   Route::post('/sides/{side}/video', [SideVideoController::class, 'create'])->middleware('auth');
   Route::delete('/sides/{side}/video', [SideVideoController::class, 'destroy'])->middleware('auth');
+
+  // likes
+  Route::get('/user/likes', [LikeController::class, 'indexUser'])->middleware('auth');
+  Route::post('/likes', [LikeController::class, 'toggle'])->middleware('auth');
 
   // TODO: flat endpoints for other resources (/comments?filter[cube_id]=42)
 });

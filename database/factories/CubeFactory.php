@@ -12,7 +12,8 @@ class CubeFactory extends Factory {
     return [
       Cube::title => $this->faker->words(rand(1, 3), true),
       Cube::description => $this->faker->text,
-      Cube::private => $this->faker->boolean,
+//      Cube::private => $this->faker->boolean,
+      Cube::private => false,
       Cube::views => $this->faker->numberBetween(0, 1000000),
       Cube::duration => $this->faker->numberBetween(30, 3600),
       Cube::CREATED_AT => $this->faker->dateTimeBetween('-1 year', '-6 months'),

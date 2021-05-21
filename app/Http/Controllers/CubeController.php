@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cube;
+use App\Models\Like;
 use App\Models\Side;
 use App\Models\User;
 use Auth;
@@ -11,16 +12,18 @@ use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class CubeController extends Controller {
-  public function indexOwned() {
+  public function indexUser() {
     return QueryBuilder::for(Auth::user()->cubes())
+      ->withCount(Like::plural())
       ->allowedFilters(
         Cube::title,
         Cube::private,
       )
       ->allowedSorts(
         Cube::title,
-        Cube::views,
         Cube::duration,
+        Cube::views,
+        Like::count(),
         Cube::CREATED_AT,
         Cube::UPDATED_AT,
       )
@@ -31,13 +34,15 @@ class CubeController extends Controller {
     return QueryBuilder::for(Cube::class)
       ->where(Cube::private, false)
       ->with(User::singular())
+      ->withCount(Like::plural())
       ->allowedFilters(
         Cube::title,
         AllowedFilter::exact(User::foreignKey())
       )
       ->allowedSorts(
-        Cube::views,
         Cube::duration,
+        Cube::views,
+        Like::count(),
         Cube::CREATED_AT,
         Cube::UPDATED_AT,
       )

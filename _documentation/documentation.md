@@ -22,8 +22,8 @@ Cube {
     description string
     private boolean
     thumbnail file
-    views number
     duration seconds
+    views number
 }
 
 Side {

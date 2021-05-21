@@ -40,4 +40,8 @@ class User extends Authenticatable {
   public function cubes() {
     return $this->hasMany(Cube::class);
   }
+
+  public function likes() {
+    return $this->hasMany(Like::class)->pluck(Cube::foreignKey());
+  }
 }

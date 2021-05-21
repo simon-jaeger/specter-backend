@@ -17,8 +17,8 @@ class Cube extends Model {
   const description = 'description';
   const private = 'private';
   const thumbnail = 'thumbnail';
-  const views = 'views';
   const duration = 'duration';
+  const views = 'views';
 
   public static function rules(string $field, Cube $existingCube = null) {
     $reqIfNew = $existingCube === null ? 'required' : 'sometimes';
@@ -41,6 +41,10 @@ class Cube extends Model {
 
   public function sides() {
     return $this->hasMany(Side::class)->orderBy(Side::position);
+  }
+
+  public function likes() {
+    return $this->belongsToMany(User::class, Like::table());
   }
 
   public function toArray() {
