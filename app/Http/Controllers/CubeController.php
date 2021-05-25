@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cube;
 use App\Models\Like;
 use App\Models\Side;
+use App\Models\Tag;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -15,6 +16,7 @@ class CubeController extends Controller {
   public function indexUser() {
     return QueryBuilder::for(Auth::user()->cubes())
       ->withCount(Like::plural())
+      ->with(Tag::plural())
       ->allowedFilters(
         Cube::title,
         Cube::private,
@@ -35,6 +37,7 @@ class CubeController extends Controller {
       ->where(Cube::private, false)
       ->with(User::singular())
       ->withCount(Like::plural())
+      ->with(Tag::plural())
       ->allowedFilters(
         Cube::title,
         AllowedFilter::exact(User::foreignKey())
@@ -60,7 +63,7 @@ class CubeController extends Controller {
 
   public function show(Cube $cube) {
     if ($cube->private && !$cube->owned()) return abort(404);
-    $cube->load(Side::plural());
+    $cube->load([Side::plural(), Tag::plural()]);
     return $cube;
   }
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\CubeThumbnailController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\SideController;
 use App\Http\Controllers\SideVideoController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserAvatarController;
 use App\Http\Controllers\UserController;
 use Carbon\Carbon;
@@ -56,6 +57,13 @@ Route::prefix('api')->group(function () {
   // likes
   Route::get('/user/likes', [LikeController::class, 'indexUser'])->middleware('auth');
   Route::post('/likes', [LikeController::class, 'toggle'])->middleware('auth');
+
+  // tags
+  Route::get('/tags', [TagController::class, 'index']);
+  Route::post('/tags', [TagController::class, 'create'])->middleware('auth');
+  // TODO: relation to cubes. maybe /cubes/id/tags?
+  // TODO: filter by tags
+  // TODO: max 5 tags per cube
 
   // TODO: flat endpoints for other resources (/comments?filter[cube_id]=42)
 });

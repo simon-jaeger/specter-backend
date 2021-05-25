@@ -47,6 +47,10 @@ class Cube extends Model {
     return $this->belongsToMany(User::class, Like::table());
   }
 
+  public function tags() {
+    return $this->belongsToMany(Tag::class);
+  }
+
   public function toArray() {
     $this->thumbnail = route('cubes.thumbnail', ['cube' => $this->id]);
     return parent::toArray();
