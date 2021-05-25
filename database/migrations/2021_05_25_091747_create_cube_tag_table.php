@@ -12,6 +12,7 @@ class CreateCubeTagTable extends Migration {
       $table->id();
       $table->foreignId(Cube::foreignKey())->constrained();
       $table->foreignId(Tag::foreignKey())->constrained();
+      $table->unique([Cube::foreignKey(), Tag::foreignKey()]);
     });
   }
 

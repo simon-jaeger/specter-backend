@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CubeController;
+use App\Http\Controllers\CubeTagsController;
 use App\Http\Controllers\CubeThumbnailController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\SideController;
@@ -61,9 +62,7 @@ Route::prefix('api')->group(function () {
   // tags
   Route::get('/tags', [TagController::class, 'index']);
   Route::post('/tags', [TagController::class, 'create'])->middleware('auth');
-  // TODO: relation to cubes. maybe /cubes/id/tags?
-  // TODO: filter by tags
-  // TODO: max 5 tags per cube
+  Route::put('/cubes/{cube}/tags/{tags}', [CubeTagsController::class, 'create'])->middleware('auth');
 
   // TODO: flat endpoints for other resources (/comments?filter[cube_id]=42)
 });
