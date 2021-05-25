@@ -40,7 +40,8 @@ class CubeController extends Controller {
       ->with(Tag::plural())
       ->allowedFilters(
         Cube::title,
-        AllowedFilter::exact(User::foreignKey())
+        AllowedFilter::exact(User::foreignKey()),
+        AllowedFilter::exact(Tag::plural() . '.' . Tag::name),
       )
       ->allowedSorts(
         Cube::duration,

@@ -15,6 +15,8 @@ class Tag extends Model {
 
   const name = 'name';
 
+  const _limit = 5;
+
   public static function rules(string $field) {
     return match ($field) {
       Tag::name => ['required', 'alpha_dash', 'min:2', 'max:24', 'unique:' . Tag::table(), Rule::notIn(['violence', 'crime', 'other-bad-words-here'])],
