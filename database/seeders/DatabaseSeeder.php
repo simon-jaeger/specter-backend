@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Cube;
 use App\Models\Side;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
@@ -25,5 +26,10 @@ class DatabaseSeeder extends Seeder {
     Side::factory(3)->for(Cube::find(2))->state(new Sequence([Side::position => 3], [Side::position => 2], [Side::position => 1]))->create();
     Side::factory(3)->for(Cube::find(3))->state(new Sequence([Side::position => 3], [Side::position => 2], [Side::position => 1]))->create();
     Side::factory(3)->for(Cube::find(4))->state(new Sequence([Side::position => 3], [Side::position => 2], [Side::position => 1]))->create();
+
+    Tag::factory(48)->create();
+    Cube::find(1)->tags()->attach([1, 2, 3]);
+    Cube::find(2)->tags()->attach([4, 5, 6]);
+    Cube::find(3)->tags()->attach([7, 8, 9]);
   }
 }

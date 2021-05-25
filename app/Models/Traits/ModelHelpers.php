@@ -9,6 +9,10 @@ trait ModelHelpers {
     return self::make()->getTable();
   }
 
+  public static function pivotTable($related) {
+    return self::make()->joiningTable($related);
+  }
+
   public static function foreignKey() {
     return self::make()->getForeignKey();
   }
