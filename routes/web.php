@@ -7,6 +7,7 @@ use App\Http\Controllers\CubeThumbnailController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\SideController;
 use App\Http\Controllers\SideVideoController;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserAvatarController;
 use App\Http\Controllers\UserController;
@@ -63,6 +64,11 @@ Route::prefix('api')->group(function () {
   Route::get('/tags', [TagController::class, 'index']);
   Route::post('/tags', [TagController::class, 'create'])->middleware('auth');
   Route::put('/cubes/{cube}/tags/{tags}', [CubeTagsController::class, 'create'])->middleware('auth');
+
+  // subscriptions
+  Route::get('/user/subscriptions', [SubscriptionController::class, 'indexSubscriptions'])->middleware('auth');
+  Route::get('/user/subscribers', [SubscriptionController::class, 'indexSubscribers'])->middleware('auth');
+  Route::post('/subscriptions', [SubscriptionController::class, 'toggle'])->middleware('auth');
 
   // TODO: flat endpoints for other resources (/comments?filter[cube_id]=42)
 });

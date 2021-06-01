@@ -33,5 +33,9 @@ class DatabaseSeeder extends Seeder {
     Cube::find(1)->tags()->attach([1, 2, 3]);
     Cube::find(2)->tags()->attach([4, 5, 6]);
     Cube::find(3)->tags()->attach([7, 8, 9]);
+
+    User::find(1)->subscribers()->sync([2, 3, 4]);
+    User::find(2)->subscribers()->sync([1, 3, 4]);
+    User::find(3)->subscribers()->sync([1, 2, 4]);
   }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Subscription;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -12,11 +13,11 @@ use Storage;
 
 class UserController extends Controller {
   public function me() {
-    return Auth::user();
+    return Auth::user()->loadCount(Subscription::subscribers);
   }
 
   public function show(User $user) {
-    return $user;
+    return $user->loadCount(Subscription::subscribers);
   }
 
   public function index() {

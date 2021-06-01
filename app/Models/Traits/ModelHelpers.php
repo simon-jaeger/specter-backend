@@ -28,4 +28,9 @@ trait ModelHelpers {
   public static function count() {
     return self::plural() . '_count';
   }
+
+  public static function createdAt() {
+    return self::table() . '.' . self::CREATED_AT;
+  }
+
 }

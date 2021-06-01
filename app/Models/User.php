@@ -30,7 +30,7 @@ class User extends Authenticatable {
   }
 
   protected $guarded = [self::password, 'remember_token'];
-  protected $hidden = [self::password, 'remember_token'];
+  protected $hidden = [self::password, 'remember_token', 'pivot'];
 
   public function toArray() {
     $this->avatar = route('users.avatar', ['user' => $this->id]);
@@ -43,5 +43,13 @@ class User extends Authenticatable {
 
   public function likes() {
     return $this->hasMany(Like::class)->pluck(Cube::foreignKey());
+  }
+
+  public function subscriptions() {
+    return $this->belongsToMany(User::class, Subscription::table(), Subscription::subscriberKey, User::foreignKey())->withTimestamps()->orderByDesc(Subscription::createdAt());
+  }
+
+  public function subscribers() {
+    return $this->belongsToMany(User::class, Subscription::table(), User::foreignKey(), Subscription::subscriberKey)->withTimestamps()->orderByDesc(Subscription::createdAt());
   }
 }
