@@ -11,6 +11,7 @@ class TagController extends Controller {
   public function index() {
     return QueryBuilder::for(Tag::class)
       ->allowedFilters(Tag::name)
+      ->defaultSort('-id')
       ->paginate(100)->appends(request()->query());
   }
 
