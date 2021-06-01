@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
+use Str;
 
 class TagController extends Controller {
   public function index() {
@@ -17,6 +18,7 @@ class TagController extends Controller {
     $data = $request->validate([
       Tag::name => Tag::rules(Tag::name),
     ]);
+    $data[Tag::name] = Str::lower($data[Tag::name]);
     return Tag::create($data);
   }
 }
