@@ -11,6 +11,7 @@ use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserAvatarController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ViewController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
@@ -69,6 +70,9 @@ Route::prefix('api')->group(function () {
   Route::get('/user/subscriptions', [SubscriptionController::class, 'indexSubscriptions'])->middleware('auth');
   Route::get('/user/subscribers', [SubscriptionController::class, 'indexSubscribers'])->middleware('auth');
   Route::post('/subscriptions', [SubscriptionController::class, 'toggle'])->middleware('auth');
+
+  // views
+  Route::post('/views', [ViewController::class, 'create'])->middleware('auth');
 
   // TODO: flat endpoints for other resources (/comments?filter[cube_id]=42)
 });
