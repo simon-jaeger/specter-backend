@@ -65,6 +65,7 @@ class CubeController extends Controller {
   public function show(Cube $cube) {
     if ($cube->private && !$cube->owned()) return abort(404);
     $cube->load([Side::plural(), Tag::plural()]);
+    $cube->loadCount(Like::plural());
     return $cube;
   }
 
