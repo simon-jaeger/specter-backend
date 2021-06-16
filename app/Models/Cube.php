@@ -51,6 +51,10 @@ class Cube extends Model {
     return $this->belongsToMany(Tag::class);
   }
 
+  public function comments() {
+    return $this->hasMany(Comment::class);
+  }
+
   public function toArray() {
     $this->thumbnail = route('cubes.thumbnail', ['cube' => $this->id]);
     return parent::toArray();

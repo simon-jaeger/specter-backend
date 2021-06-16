@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\CubeController;
 use App\Http\Controllers\CubeTagsController;
 use App\Http\Controllers\CubeThumbnailController;
@@ -73,6 +74,10 @@ Route::prefix('api')->group(function () {
 
   // views
   Route::post('/views', [ViewController::class, 'create'])->middleware('auth');
+
+  // comments
+  Route::get('/comments', [CommentsController::class, 'index'])->middleware('auth');
+  Route::post('/comments', [CommentsController::class, 'create'])->middleware('auth');
 
   // TODO: flat endpoints for other resources (/comments?filter[cube_id]=42)
 });

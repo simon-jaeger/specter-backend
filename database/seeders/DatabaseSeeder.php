@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Comment;
 use App\Models\Cube;
 use App\Models\Side;
 use App\Models\Tag;
@@ -37,5 +38,7 @@ class DatabaseSeeder extends Seeder {
     User::find(1)->subscribers()->sync([2, 3, 4]);
     User::find(2)->subscribers()->sync([1, 3, 4]);
     User::find(3)->subscribers()->sync([1, 2, 4]);
+
+    Comment::factory(24)->create();
   }
 }
