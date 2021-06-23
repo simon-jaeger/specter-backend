@@ -25,7 +25,7 @@ class User extends Authenticatable {
       User::username => [$reqIfNew, 'alpha_dash', 'max:255', $unique],
       User::email => [$reqIfNew, 'email', $unique],
       User::password => [$reqIfNew, 'string', 'min:8'],
-      User::avatar => ['image', 'max:1024'],
+      User::avatar => ['mimes:jpg,png', 'max:10240'],
     };
   }
 

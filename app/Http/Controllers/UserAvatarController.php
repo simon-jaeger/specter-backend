@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 use Storage;
 
 class UserAvatarController extends Controller {
@@ -19,7 +20,12 @@ class UserAvatarController extends Controller {
       User::avatar => User::rules(User::avatar),
     ]);
     $user = Auth::user();
-    $user->avatar = Storage::putFile('', $request->file(User::avatar));
+    $filename = $request->file(User::avatar)->hashName();
+    $img = Image::make($request->file(User::avatar))
+      ->fit(200, 200)
+      ->encode();
+    Storage::put($filename, $img);
+    $user->avatar = $filename;
     $user->save();
     return Storage::response($user->avatar);
   }
