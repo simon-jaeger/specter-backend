@@ -30,7 +30,11 @@ Artisan::command('clean', function () {
 
   $this->line('registering cube thumbnails...');
   $this->withProgressBar(Cube::all(), function (Cube $cube) use ($toKeep) {
-    if ($cube->thumbnail) $toKeep->push($cube->thumbnail);
+    if ($cube->thumbnail) {
+      collect(CubeThumbnailController::sizes)->each(
+        fn($size) => $toKeep->push($size[0] . $cube->thumbnail)
+      );
+    }
   });
   $this->newLine(2);
 

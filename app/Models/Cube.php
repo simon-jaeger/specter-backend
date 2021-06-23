@@ -26,7 +26,7 @@ class Cube extends Model {
       Cube::title => [$reqIfNew, 'filled', 'string', 'max:255'],
       Cube::description => ['nullable', 'string', 'max:1000'],
       Cube::private => ['sometimes', 'boolean'],
-      Cube::thumbnail => ['image', 'max:2048'],
+      Cube::thumbnail => ['mimes:jpg,png', 'max:10240'],
     };
   }
 
