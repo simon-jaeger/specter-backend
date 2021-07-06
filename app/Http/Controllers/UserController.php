@@ -33,7 +33,7 @@ class UserController extends Controller {
         User::CREATED_AT,
         User::UPDATED_AT,
       )
-      ->paginate(100)->appends(request()->query());
+      ->jsonPaginate();
   }
 
   public function update(Request $request) {

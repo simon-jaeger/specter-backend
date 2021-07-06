@@ -14,10 +14,10 @@ class SubscriptionController extends Controller {
   }
 
   public function indexSubscriptions() {
-    return Auth::user()->subscriptions()->paginate(100);
+    return Auth::user()->subscriptions()->jsonPaginate();
   }
 
   public function indexSubscribers() {
-    return Auth::user()->subscribers()->paginate(100);
+    return Auth::user()->subscribers()->jsonPaginate();
   }
 }

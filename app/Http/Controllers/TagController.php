@@ -12,7 +12,7 @@ class TagController extends Controller {
     return QueryBuilder::for(Tag::class)
       ->allowedFilters(Tag::name)
       ->defaultSort('-id')
-      ->paginate(100)->appends(request()->query());
+      ->jsonPaginate();
   }
 
   public function create(Request $request) {

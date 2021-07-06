@@ -29,7 +29,7 @@ class CubeController extends Controller {
         Cube::CREATED_AT,
         Cube::UPDATED_AT,
       )
-      ->paginate(100)->appends(request()->query());
+      ->jsonPaginate();
   }
 
   public function index() {
@@ -50,7 +50,7 @@ class CubeController extends Controller {
         Cube::CREATED_AT,
         Cube::UPDATED_AT,
       )
-      ->paginate(100)->appends(request()->query());
+      ->jsonPaginate();
   }
 
   public function create(Request $request) {
