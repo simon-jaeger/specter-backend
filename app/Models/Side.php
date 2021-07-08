@@ -40,7 +40,7 @@ class Side extends Model {
   }
 
   public function toArray() {
-    $this->video = route('sides.video', ['side' => $this->id]);
+    $this->video = '/api/sides/'. $this->id . '/video';
     return parent::toArray();
   }
 

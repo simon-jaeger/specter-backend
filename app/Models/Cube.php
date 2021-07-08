@@ -56,7 +56,7 @@ class Cube extends Model {
   }
 
   public function toArray() {
-    $this->thumbnail = route('cubes.thumbnail', ['cube' => $this->id]);
+    $this->thumbnail = '/api/cubes/'. $this->id . '/thumbnail';
     return parent::toArray();
   }
 
