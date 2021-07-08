@@ -33,7 +33,7 @@ class User extends Authenticatable {
   protected $hidden = [self::password, 'remember_token', 'pivot'];
 
   public function toArray() {
-    $this->avatar = route('users.avatar', ['user' => $this->id]);
+    $this->avatar = '/api/users/'. $this->id . '/avatar';
     return parent::toArray();
   }
 
