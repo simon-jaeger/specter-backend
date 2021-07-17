@@ -10,8 +10,8 @@ class CreateCubeTagTable extends Migration {
   public function up() {
     Schema::create(Cube::pivotTable(Tag::class), function (Blueprint $table) {
       $table->id();
-      $table->foreignId(Cube::foreignKey())->constrained();
-      $table->foreignId(Tag::foreignKey())->constrained();
+      $table->foreignId(Cube::foreignKey())->constrained()->cascadeOnDelete();
+      $table->foreignId(Tag::foreignKey())->constrained()->cascadeOnDelete();
       $table->unique([Cube::foreignKey(), Tag::foreignKey()]);
     });
   }

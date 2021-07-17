@@ -10,8 +10,8 @@ class CreateSubscriptionsTable extends Migration {
   public function up() {
     Schema::create(Subscription::table(), function (Blueprint $table) {
       $table->id();
-      $table->foreignId(Subscription::subscriberKey)->constrained(User::table());
-      $table->foreignId(User::foreignKey())->constrained();
+      $table->foreignId(Subscription::subscriberKey)->constrained(User::table())->cascadeOnDelete();
+      $table->foreignId(User::foreignKey())->constrained()->cascadeOnDelete();
       $table->timestamps();
     });
   }

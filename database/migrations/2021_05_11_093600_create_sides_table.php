@@ -13,7 +13,7 @@ class CreateSidesTable extends Migration {
       $table->string(Side::name);
       $table->enum(Side::position, range(1, Side::_limit));
       $table->string(Side::video)->nullable();
-      $table->foreignId(Cube::foreignKey())->constrained();
+      $table->foreignId(Cube::foreignKey())->constrained()->cascadeOnDelete();
       $table->timestamps();
     });
   }

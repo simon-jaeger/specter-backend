@@ -17,7 +17,7 @@ class SideVideoController extends Controller {
     if ($request->boolean('html'))
       return $side->toHtmlVideo();
     else
-      return Storage::response($side->video);
+      return response()->file(Storage::path($side->video));
   }
 
   public function create(Request $request, FileReceiver $receiver, Side $side) {

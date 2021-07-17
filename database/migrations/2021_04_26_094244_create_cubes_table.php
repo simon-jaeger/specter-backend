@@ -16,7 +16,7 @@ class CreateCubesTable extends Migration {
       $table->string(Cube::thumbnail)->nullable();
       $table->integer(Cube::duration)->unsigned()->default(0);
       $table->integer(Cube::views)->unsigned()->default(0);
-      $table->foreignId(User::foreignKey())->constrained();
+      $table->foreignId(User::foreignKey())->constrained()->cascadeOnDelete();
       $table->timestamps();
     });
   }
