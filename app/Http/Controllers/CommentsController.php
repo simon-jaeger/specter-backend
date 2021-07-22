@@ -12,7 +12,10 @@ class CommentsController extends Controller {
   public function index(Request $request) {
     $cube = Cube::findOrFail($request->input('filter.' . Cube::foreignKey()));
     if ($cube->private) return abort(404);
-    return $cube->comments()->with(User::singular())->latest()->jsonPaginate();
+    $paginator = $cube->comments()->with(User::singular())->latest()->jsonPaginate();
+    $resp = $paginator->toArray();
+    $resp['data'] = array_reverse($resp['data']);
+    return $resp;
   }
 
   public function create(Request $request) {
