@@ -16,8 +16,9 @@ class AuthController extends Controller {
       User::email => User::rules(User::email),
       User::password => User::rules(User::password),
     ]);
-    $user = User::create($data);
+    $user = User::make($data);
     $user->password = Hash::make($user->password);
+    $user->save();
     Auth::login($user, true);
     return $user;
   }
