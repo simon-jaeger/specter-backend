@@ -3,6 +3,16 @@
 Specter is a video platform for multi perspective videos.
 Backend and frontend are separated and interact over an API.
 
+## Setup
+
+```sh
+# create a mysql database for specter
+cp .env.example .env
+vim .env # add database credentials
+php artisan key:generate
+php artisan migrate:fresh --seed
+```
+
 ## Entity relationship diagram
 
 ```mermaid
